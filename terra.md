@@ -18,8 +18,9 @@ Building terra requires [llvm].
 
 ## Bundling
 
-[Bundling](/bundle) terra requires bunding in the [llvm] libraries too.
-There's a script documenting what these are:
+[Bundling](/bundle) terra requires bunding in the [llvm] static libraries.
+There's a script documenting what these are that can be used with bundle
+directly:
 
 	bundle ... -a terra -a "$(csrc/terra/bundle-libs)"
 
