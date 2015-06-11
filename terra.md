@@ -10,6 +10,9 @@ The terra module exposes the complete Terra Lua API and installs
 a require() loader for loading .t files from the same locations
 that are used for loading Lua files.
 
+__NOTE:__ 32bit platforms are not yet supported (the included binaries
+work but there's no interfacing between Terra and Lua and no debug support).
+
 [terralang]: http://terralang.org
 
 ## Building
