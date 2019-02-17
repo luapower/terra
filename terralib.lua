@@ -3374,7 +3374,7 @@ local function getinternalizedfile(path)
     return cur
 end
 
-local clangresourcedirectory = "$CLANG_RESOURCE$"
+local clangresourcedirectory = "../../csrc/clang-resource-dir"
 local function headerprovider(path)
     if path:sub(1,#clangresourcedirectory) == clangresourcedirectory then
         return getinternalizedfile(path)
