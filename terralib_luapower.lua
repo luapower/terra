@@ -7,9 +7,9 @@ local ffi = require'ffi'
 local List = require'asdl'.List
 
 --TODO: expose '!' to Lua as package.exedir.
-terralib.terrahome = package.path
+terralib.terrahome = package.cpath
 	:gsub('^.[\\/].-;', '')
-	:match'(.-)[\\/]lua[\\/]%?%.lua'
+	:match'(.-)[\\/]clib[\\/]'
 
 --$ mgit clone mingw64-headers
 local mingw64_headers_dir = '../../csrc/mingw64-headers'
