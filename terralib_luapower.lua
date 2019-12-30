@@ -6,13 +6,12 @@ assert(terra, 'terra not loaded')
 local ffi = require'ffi'
 local List = require'asdl'.List
 
---TODO: expose '!' to Lua as package.exedir.
-terralib.terrahome = package.cpath
-	:gsub('^.[\\/].-;', '')
-	:match'(.-)[\\/]clib[\\/]'
+terralib.terrahome = require'package.exedir'
+
+terralib.low_includepath = terralib.terrahome..'/../../csrc'
 
 --$ mgit clone mingw64-headers
-local mingw64_headers_dir = '../../csrc/mingw64-headers'
+local mingw64_headers_dir = terralib.low_includepath..'/mingw64-headers'
 
 terra.systemincludes = List()
 if ffi.os == 'Windows' then
