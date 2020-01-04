@@ -39,7 +39,7 @@ package.terrapath = package.path:gsub('%.lua', '%.t')
 
 --overload loadfile() to interpret *.t files as Terra code.
 local lua_loadfile = loadfile
-_G.loadfile = function(file)
+function loadfile(file)
 	local loadfile = file:find'%.t$' and terra.loadfile or lua_loadfile
 	return loadfile(file)
 end

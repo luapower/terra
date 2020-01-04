@@ -44,17 +44,21 @@ Anyway, the changelist:
   * LuaJIT was modified to `require'terra'` if loading a `*.t` file, and to
   load the file via `_G.loadfile` instead of `lua_loadfile`.
   * `terralib.lua` was changed to load `terralib_luapower.lua` at the end of
-  the file.
-  * `package.terrapath` is set to match `package.path` in `terralib_luapower.lua`.
-  * `terralib.linklibrary` was modified to also accept `foo` instead of
-  `libfoo.so` on Linux.
-  * `loadfile` is overloaded to interpret `*.t` files as Terra source code.
-  * `terralib.lua` is not bundled into the binary and is provided separately.
+  the file, which changes the following:
+    * `loadfile` is overloaded to call `terra.loadfile` for `*.t` files.
+    * `terralib.terrahome` is set to `package.exedir`.
+    * `package.terrapath` is set to match `package.path`.
+    * `terralib.linklibrary` is modified to also accept `foo` for `libfoo.so`
+    and `libfoo.dylib` respectively, just like `ffi.load` does.
+  * `terralib.lua`, `asdl.lua` and `terralist.lua` are not bundled into the
+  binary and are provided separately.
   * `strict.lua` is not loaded and not included (it's included with [luajit]
   and must be loaded manually as needed).
-  * `std.t` and `parsing.t` were renamed `terra/std.t` and `terra/parsint.t`.
+  * `std.t` and `parsing.t` were renamed `terra/std.t` and `terra/parsing.t`
   respectively and are now in the luapower dir along with all Lua files.
-  * the system include paths are set for [mingw64-headers].
+  * the system include paths for Windows are set for [mingw64-headers] so
+  building binaries with Terra's API works out-of-the-box providing the
+  [luapower toolchain][building] is installed (needed for linking).
 
 [source code changes]: https://github.com/luapower/terra_fork/compare/0a11f98...luapower:master
 [upstream changes]:    https://github.com/luapower/terra_fork/compare/0a11f98...zdevito:master
