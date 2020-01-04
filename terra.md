@@ -43,15 +43,18 @@ Anyway, the changelist:
   a normal Lua/C module that must be included with `require'terra'` from Lua.
   * LuaJIT was modified to `require'terra'` if loading a `*.t` file, and to
   load the file via `_G.loadfile` instead of `lua_loadfile`.
-  * `loadfile` was overloaded to interpret `*.t` files as Terra source code.
-  * `terralib.lua` and `cudalib.lua` are not bundled into the binary,
-  and are provided separately.
+  * `terralib.lua` was changed to load `terralib_luapower.lua` at the end of
+  the file.
+  * `package.terrapath` is set to match `package.path` in `terralib_luapower.lua`.
+  * `terralib.linklibrary` was modified to also accept `foo` instead of
+  `libfoo.so` on Linux.
+  * `loadfile` is overloaded to interpret `*.t` files as Terra source code.
+  * `terralib.lua` is not bundled into the binary and is provided separately.
   * `strict.lua` is not loaded and not included (it's included with [luajit]
   and must be loaded manually as needed).
-  * `std.t` and `parsing.t` were renamed `terra_std.t` and `terra_parsint.t`.
+  * `std.t` and `parsing.t` were renamed `terra/std.t` and `terra/parsint.t`.
   respectively and are now in the luapower dir along with all Lua files.
   * the system include paths are set for [mingw64-headers].
-  * the location of clang's resource dir is set for [clang-resource-dir].
 
 [source code changes]: https://github.com/luapower/terra_fork/compare/0a11f98...luapower:master
 [upstream changes]:    https://github.com/luapower/terra_fork/compare/0a11f98...zdevito:master

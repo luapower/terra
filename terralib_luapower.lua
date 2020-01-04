@@ -43,3 +43,22 @@ _G.loadfile = function(file)
 	local loadfile = file:find'%.t$' and terra.loadfile or lua_loadfile
 	return loadfile(file)
 end
+
+--make linklibrary work more portably like ffi.load() does.
+local linklibrary = terralib.linklibrary
+
+if ffi.os == 'Linux' then
+	function terralib.linklibrary(filename)
+		if not (filename:find'%.so$' or filename:find'/') then
+			filename = 'lib'..filename..'.so'
+		end
+		return linklibrary(filename)
+	end
+elseif ffi.os == 'OSX' then
+	function terralib.linklibrary(filename)
+		if not (filename:find'%.dylib$' or filename:find'/') then
+			filename = 'lib'..filename..'.dylib'
+		end
+		return linklibrary(filename)
+	end
+end
